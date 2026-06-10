@@ -187,7 +187,8 @@ textarea{
 
 .previewTotal{
   border-top:3px solid #000;
-  margin-top:auto;
+  margin-top:3px;
+  padding-top:2px;
 }
 
 .reguaHorizontal{
@@ -270,13 +271,6 @@ textarea{
   min-height:380px;
   padding:16px;
   margin:auto;
-  display:flex;
-  flex-direction:column;
-  justify-content:flex-start;
-}
-
-.semTitulos{
-  padding-top:120px;
 }
 
 .miniPreview h2{
@@ -301,8 +295,8 @@ textarea{
 
 .total{
   border-top:2px solid #111827;
-  margin-top:18px;
-  padding-top:12px;
+  margin-top:3px;
+  padding-top:2px;
   font-size:24px;
   font-weight:bold;
   display:flex;
@@ -370,7 +364,7 @@ textarea{
   <div>
     <label>Fonte título px</label>
     <input type="number" id="fonteTitulo" value="60" oninput="atualizarPreviewAjustes()">
-    <div class="ajuda">Tamanho do ROTA.</div>
+    <div class="ajuda">Sem uso no modelo atual.</div>
   </div>
 
   <div>
@@ -628,12 +622,13 @@ function mostrarLista(){
 }
 
 function previewHTML(itens){
-  var html = '<div class="miniPreview semTitulos">';
+  var html = '<div class="miniPreview">';
 
   itens.forEach(function(i){
     html += '<div class="linha"><span>' + i.cluster + '</span><span>' + i.total + '</span></div>';
   });
 
+  html += '<div class="total"><span>TOTAL</span><span>' + totalGeral(itens) + '</span></div>';
   html += '</div>';
 
   return html;
@@ -673,10 +668,14 @@ function atualizarPreviewAjustes(){
   var html = "";
 
   itens.forEach(function(i){
-    html += '<div class="previewLinha" style="font-size:' + (fonte / 2.4) + 'px;margin-bottom:' + (espaco * 2) + 'px;">';
+    html += '<div class="previewLinha" style="font-size:' + (fonte / 2.8) + 'px;margin-bottom:' + (espaco / 2.2) + 'px;">';
     html += '<span>' + i.cluster + '</span><span>' + i.total + '</span>';
     html += '</div>';
   });
+
+  html += '<div class="previewLinha previewTotal" style="font-size:' + (fonte / 2.8) + 'px;padding-top:2px;margin-top:3px;">';
+  html += '<span>TOTAL</span><span>' + totalGeral(itens) + '</span>';
+  html += '</div>';
 
   conteudo.innerHTML = html;
 
@@ -701,10 +700,8 @@ function criarPaginaEtiqueta(itens){
     "@page{size:" + largura + "mm " + altura + "mm;margin:0;}" +
     "html,body{width:" + largura + "mm;height:" + altura + "mm;margin:0;padding:0;font-family:Arial,sans-serif;color:#000;background:#fff;overflow:hidden;}" +
     ".etiqueta{width:" + largura + "mm;height:" + altura + "mm;box-sizing:border-box;display:flex;flex-direction:column;padding-left:" + margem + "mm;padding-right:" + margem + "mm;padding-bottom:" + margem + "mm;padding-top:" + (margem + offsetY) + "mm;}" +
-    ".titulo{text-align:center;font-size:" + fonteTitulo + "px;font-weight:900;line-height:1;margin-bottom:" + espaco + "px;}" +
     ".linha{display:flex;justify-content:space-between;align-items:center;font-size:" + fonte + "px;font-weight:900;line-height:1.05;margin-bottom:" + espaco + "px;}" +
-    ".cabecalho{border-bottom:5px solid #000;padding-bottom:12px;margin-bottom:" + espaco + "px;}" +
-    ".total{border-top:5px solid #000;padding-top:16px;margin-top:auto;margin-bottom:0;}" +
+    ".total{border-top:3px solid #000;padding-top:2px;margin-top:3px;margin-bottom:0;}" +
     "span{white-space:nowrap;}";
 
   doc.head.appendChild(style);
@@ -718,6 +715,11 @@ function criarPaginaEtiqueta(itens){
     linha.innerHTML = "<span>" + i.cluster + "</span><span>" + i.total + "</span>";
     etiqueta.appendChild(linha);
   });
+
+  var total = doc.createElement("div");
+  total.className = "linha total";
+  total.innerHTML = "<span>TOTAL</span><span>" + totalGeral(itens) + "</span>";
+  etiqueta.appendChild(total);
 
   doc.body.appendChild(etiqueta);
 
