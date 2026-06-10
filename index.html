@@ -2,81 +2,474 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Etiquetas L42 PRO FULL - QZ Tray</title>
+<title>Impressão de Etiquetas - L42 PRO FULL</title>
 <script src="https://cdn.jsdelivr.net/npm/qz-tray@2.2.4/qz-tray.js"></script>
+
 <style>
 *{box-sizing:border-box}
-body{margin:0;padding:20px;font-family:Arial,sans-serif;background:#f3f4f6;color:#111827}
-.container{max-width:1200px;margin:auto;background:#fff;padding:22px;border-radius:16px;box-shadow:0 8px 25px rgba(0,0,0,.12)}
-h1{text-align:center;color:#ff5a00;margin-top:0}
-.sub{text-align:center;color:#555;margin-bottom:20px}
-.painel{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;background:#f9fafb;border:1px solid #e5e7eb;padding:16px;border-radius:12px;margin-bottom:16px}
-label{display:block;font-weight:bold;font-size:13px;margin-bottom:5px}
-input,select,button,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #d1d5db;font-size:14px}
-button{border:none;background:#ff5a00;color:white;font-weight:bold;cursor:pointer}
-button:hover{background:#e14f00}
-.btn-dark{background:#111827}.btn-green{background:#059669}.btn-blue{background:#2563eb}
-.status{padding:12px;border-radius:10px;background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;font-weight:bold;margin:12px 0}
-.acoes{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-bottom:15px}
-textarea{min-height:120px;font-family:Consolas,monospace;resize:vertical}
-.lista{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:16px;margin-top:20px}
-.item{background:#f9fafb;border:1px solid #e5e7eb;border-radius:14px;padding:14px}
-.item-topo{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}
-.item-topo button{width:130px}
-.preview{background:white;border:2px dashed #9ca3af;border-radius:8px;width:300px;min-height:450px;padding:18px;margin:auto}
-.preview h2{margin:0 0 16px;text-align:center;font-size:30px}
-.linha{display:flex;justify-content:space-between;font-size:24px;margin:9px 0}
-.cabecalho{font-weight:bold;border-bottom:2px solid #111827;padding-bottom:8px;margin-bottom:12px}
-.total{border-top:2px solid #111827;margin-top:18px;padding-top:12px;font-size:24px;font-weight:bold;display:flex;justify-content:space-between}
-.obs{font-size:13px;color:#6b7280;line-height:1.4}
-.alerta{background:#ecfdf5;border:1px solid #a7f3d0;color:#065f46}
+
+body{
+  margin:0;
+  padding:20px;
+  font-family:Arial,sans-serif;
+  background:#f3f4f6;
+  color:#111827;
+}
+
+.container{
+  max-width:1350px;
+  margin:auto;
+  background:#fff;
+  padding:24px;
+  border-radius:18px;
+  box-shadow:0 8px 25px rgba(0,0,0,.12);
+}
+
+h1{
+  text-align:center;
+  color:#ff5a00;
+  margin:0 0 10px;
+  font-size:34px;
+}
+
+.sub{
+  text-align:center;
+  color:#555;
+  margin-bottom:22px;
+  font-size:18px;
+}
+
+.painel{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:14px;
+  background:#f9fafb;
+  border:1px solid #e5e7eb;
+  padding:18px;
+  border-radius:14px;
+  margin-bottom:16px;
+}
+
+label{
+  display:block;
+  font-weight:bold;
+  font-size:14px;
+  margin-bottom:6px;
+}
+
+.ajuda{
+  font-size:12px;
+  color:#6b7280;
+  margin-top:4px;
+  line-height:1.3;
+}
+
+input,select,button,textarea{
+  width:100%;
+  padding:11px;
+  border-radius:9px;
+  border:1px solid #d1d5db;
+  font-size:15px;
+}
+
+button{
+  border:none;
+  background:#ff5a00;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+  font-size:16px;
+}
+
+button:hover{opacity:.9}
+
+.btn-dark{background:#111827}
+.btn-green{background:#059669}
+.btn-blue{background:#2563eb}
+
+.status{
+  padding:14px;
+  border-radius:12px;
+  background:#fff7ed;
+  border:1px solid #fed7aa;
+  color:#9a3412;
+  font-weight:bold;
+  margin:14px 0;
+}
+
+.alerta{
+  background:#ecfdf5;
+  border:1px solid #a7f3d0;
+  color:#065f46;
+}
+
+.erro{
+  background:#fef2f2;
+  border:1px solid #fecaca;
+  color:#991b1b;
+}
+
+.acoes{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+  gap:12px;
+  margin-bottom:18px;
+}
+
+textarea{
+  min-height:130px;
+  font-family:Consolas,monospace;
+  resize:vertical;
+}
+
+.layout{
+  display:grid;
+  grid-template-columns:420px 1fr;
+  gap:22px;
+  margin-top:22px;
+}
+
+.previewBox{
+  background:#f9fafb;
+  border:1px solid #e5e7eb;
+  padding:16px;
+  border-radius:14px;
+  position:sticky;
+  top:20px;
+  align-self:start;
+}
+
+.previewTitulo{
+  text-align:center;
+  font-weight:bold;
+  margin-bottom:10px;
+  color:#ff5a00;
+  font-size:18px;
+}
+
+.previewArea{
+  overflow:auto;
+  padding:20px 45px 35px 20px;
+}
+
+.previewEtiqueta{
+  background:white;
+  border:2px dashed #9ca3af;
+  margin:auto;
+  position:relative;
+  overflow:hidden;
+  color:#000;
+}
+
+.previewConteudo{
+  width:100%;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+}
+
+.previewRota{
+  text-align:center;
+  font-weight:900;
+  line-height:1;
+}
+
+.previewLinha{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-weight:800;
+}
+
+.previewCabecalho{
+  border-bottom:3px solid #000;
+}
+
+.previewTotal{
+  border-top:3px solid #000;
+  margin-top:auto;
+}
+
+.reguaHorizontal{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:-20px;
+  text-align:center;
+  font-size:12px;
+  color:#374151;
+}
+
+.reguaVertical{
+  position:absolute;
+  right:-43px;
+  top:50%;
+  transform:rotate(90deg);
+  font-size:12px;
+  color:#374151;
+  white-space:nowrap;
+}
+
+.guia{
+  margin-top:15px;
+  display:grid;
+  gap:8px;
+  font-size:13px;
+}
+
+.barra{
+  background:#e5e7eb;
+  border-radius:999px;
+  height:9px;
+  overflow:hidden;
+}
+
+.barra span{
+  display:block;
+  height:100%;
+  background:#ff5a00;
+}
+
+.configInfo{
+  margin-top:18px;
+  font-size:13px;
+  color:#374151;
+  line-height:1.5;
+}
+
+.configInfo strong{color:#111827}
+
+.lista{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(330px,1fr));
+  gap:16px;
+}
+
+.item{
+  background:#f9fafb;
+  border:1px solid #e5e7eb;
+  border-radius:14px;
+  padding:14px;
+}
+
+.item-topo{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-bottom:10px;
+}
+
+.item-topo button{width:140px}
+
+.miniPreview{
+  background:white;
+  border:2px dashed #9ca3af;
+  border-radius:8px;
+  width:260px;
+  min-height:380px;
+  padding:16px;
+  margin:auto;
+}
+
+.miniPreview h2{
+  margin:0 0 16px;
+  text-align:center;
+  font-size:30px;
+}
+
+.linha{
+  display:flex;
+  justify-content:space-between;
+  font-size:24px;
+  margin:9px 0;
+}
+
+.cabecalho{
+  font-weight:bold;
+  border-bottom:2px solid #111827;
+  padding-bottom:8px;
+  margin-bottom:12px;
+}
+
+.total{
+  border-top:2px solid #111827;
+  margin-top:18px;
+  padding-top:12px;
+  font-size:24px;
+  font-weight:bold;
+  display:flex;
+  justify-content:space-between;
+}
+
+.obs{
+  font-size:13px;
+  color:#6b7280;
+  line-height:1.4;
+}
+
+@media(max-width:950px){
+  .layout{grid-template-columns:1fr}
+  .previewBox{position:relative;top:0}
+}
 </style>
 </head>
+
 <body>
+
 <div class="container">
+
 <h1>Impressão de Etiquetas - L42 PRO FULL</h1>
-<div class="sub">Procura automática: ELGIN L42PRO FULL (Copiar 1)</div>
+<div class="sub">Configuração recomendada: 100 mm x 150 mm</div>
 
 <div class="painel">
-<div><label>Arquivo CSV/TXT</label><input type="file" id="arquivo" accept=".csv,.txt"></div>
-<div><label>Impressora selecionada</label><select id="impressoras"></select></div>
-<div><label>Reconectar / Procurar</label><button onclick="conectarQZ()">Procurar Impressora</button></div>
-<div><label>Largura mm</label><input type="number" id="largura" value="100"></div>
-<div><label>Altura mm</label><input type="number" id="altura" value="150"></div>
-<div><label>Fonte px</label><input type="number" id="fonte" value="42"></div>
-<div><label>Fonte título px</label><input type="number" id="fonteTitulo" value="54"></div>
-<div><label>Espaço linhas px</label><input type="number" id="espaco" value="14"></div>
-<div><label>Margem interna mm</label><input type="number" id="margem" value="8"></div>
-<div><label>Cópias</label><input type="number" id="copias" value="1"></div>
+
+  <div>
+    <label>Arquivo CSV/TXT</label>
+    <input type="file" id="arquivo" accept=".csv,.txt">
+    <div class="ajuda">Cada linha vira uma etiqueta.</div>
+  </div>
+
+  <div>
+    <label>Impressora selecionada</label>
+    <select id="impressoras"></select>
+    <div class="ajuda">Procura automática por L42/ELGIN.</div>
+  </div>
+
+  <div>
+    <label>Reconectar / Procurar</label>
+    <button onclick="conectarQZ()">Procurar Impressora</button>
+    <div class="ajuda">Use se o QZ Tray foi aberto depois.</div>
+  </div>
+
+  <div>
+    <label>Largura mm</label>
+    <input type="number" id="largura" value="100" oninput="atualizarPreviewAjustes()">
+    <div class="ajuda">Largura física da etiqueta.</div>
+  </div>
+
+  <div>
+    <label>Altura mm</label>
+    <input type="number" id="altura" value="150" oninput="atualizarPreviewAjustes()">
+    <div class="ajuda">Altura física da etiqueta.</div>
+  </div>
+
+  <div>
+    <label>Fonte px</label>
+    <input type="number" id="fonte" value="58" oninput="atualizarPreviewAjustes()">
+    <div class="ajuda">Tamanho das linhas.</div>
+  </div>
+
+  <div>
+    <label>Fonte título px</label>
+    <input type="number" id="fonteTitulo" value="60" oninput="atualizarPreviewAjustes()">
+    <div class="ajuda">Tamanho do ROTA.</div>
+  </div>
+
+  <div>
+    <label>Espaço linhas px</label>
+    <input type="number" id="espaco" value="1" oninput="atualizarPreviewAjustes()">
+    <div class="ajuda">Distância entre as clusters.</div>
+  </div>
+
+  <div>
+    <label>Margem interna mm</label>
+    <input type="number" id="margem" value="10" oninput="atualizarPreviewAjustes()">
+    <div class="ajuda">Espaço das bordas.</div>
+  </div>
+
+  <div>
+    <label>Mover impressão para baixo mm</label>
+    <input type="number" id="offsetY" value="35" oninput="atualizarPreviewAjustes()">
+    <div class="ajuda">Use para corrigir corte em cima.</div>
+  </div>
+
+  <div>
+    <label>Cópias</label>
+    <input type="number" id="copias" value="1">
+    <div class="ajuda">Quantidade de cópias.</div>
+  </div>
+
 </div>
 
 <div class="status" id="status">Aguardando conexão com o QZ Tray...</div>
 
 <div class="acoes">
-<button class="btn-blue" onclick="imprimirTeste()">Sair Teste</button>
-<button class="btn-green" onclick="imprimirTodas()">Imprimir Todas</button>
-<button onclick="carregarExemplo()">Carregar Exemplo</button>
-<button class="btn-dark" onclick="limparTudo()">Limpar</button>
+  <button class="btn-blue" onclick="imprimirTeste()">Imprimir Teste</button>
+  <button class="btn-green" onclick="imprimirTodas()">Imprimir Todas</button>
+  <button onclick="carregarExemplo()">Carregar Exemplo</button>
+  <button class="btn-dark" onclick="limparTudo()">Limpar</button>
 </div>
 
 <label>Ou cole os dados aqui:</label>
 <textarea id="textoManual" placeholder="B-14(66)+B-15(23)+B-16(84)
-B-17(76)+B-18(55)+B-19(37)"></textarea>
+D-18(62)+D-19(35)"></textarea>
+
 <br><br>
+
 <button onclick="processarTextoManual()">Processar Texto Colado</button>
-<p class="obs">Cada linha vira uma etiqueta. Exemplo: B-14(66)+B-15(23)+B-16(84).</p>
-<hr>
-<div id="lista" class="lista"></div>
+
+<p class="obs">
+Formato aceito: B-14(66)+B-15(23)+B-16(84). Cada linha será uma etiqueta separada.
+</p>
+
+<div class="layout">
+
+  <div class="previewBox">
+    <div class="previewTitulo">Prévia visual em tempo real</div>
+
+    <div class="previewArea">
+      <div id="previewEtiqueta" class="previewEtiqueta">
+        <div class="reguaHorizontal" id="reguaHorizontal"></div>
+        <div class="reguaVertical" id="reguaVertical"></div>
+        <div id="previewConteudo" class="previewConteudo"></div>
+      </div>
+    </div>
+
+    <div class="guia">
+      <div>Margem</div>
+      <div class="barra"><span id="barraMargem"></span></div>
+
+      <div>Fonte</div>
+      <div class="barra"><span id="barraFonte"></span></div>
+
+      <div>Deslocamento para baixo</div>
+      <div class="barra"><span id="barraOffset"></span></div>
+    </div>
+
+    <div class="configInfo">
+      <p><strong>Largura/Altura:</strong> devem bater com o driver da impressora.</p>
+      <p><strong>Margem:</strong> quanto menor, mais aproveita a etiqueta.</p>
+      <p><strong>Fonte:</strong> aumenta ou diminui os textos.</p>
+      <p><strong>Mover impressão para baixo:</strong> corrige quando a impressora corta o topo.</p>
+    </div>
+  </div>
+
+  <div>
+    <div id="lista" class="lista"></div>
+  </div>
+
+</div>
+
 </div>
 
 <script>
-var IMPRESSORA_PADRAO = "ELGIN L42PRO FULL (Copiar 1)";
 var etiquetas = [];
 
-qz.security.setCertificatePromise(function(resolve, reject){ resolve(null); });
-qz.security.setSignaturePromise(function(toSign){ return function(resolve, reject){ resolve(null); }; });
+qz.security.setCertificatePromise(function(resolve, reject){
+  resolve(null);
+});
 
-window.addEventListener("load", function(){ conectarQZ(); });
+qz.security.setSignaturePromise(function(toSign){
+  return function(resolve, reject){
+    resolve(null);
+  };
+});
+
+window.addEventListener("load", function(){
+  atualizarPreviewAjustes();
+  conectarQZ();
+});
 
 async function conectarQZ(){
   var status = document.getElementById("status");
@@ -96,8 +489,17 @@ async function conectarQZ(){
     var encontrada = "";
 
     impressoras.forEach(function(nome){
-      if(nome === IMPRESSORA_PADRAO){
-        encontrada = nome;
+      var n = nome.toUpperCase();
+
+      if(
+        n.includes("L42") ||
+        n.includes("L42PRO") ||
+        n.includes("L42 PRO") ||
+        n.includes("ELGIN")
+      ){
+        if(!encontrada){
+          encontrada = nome;
+        }
       }
     });
 
@@ -107,9 +509,18 @@ async function conectarQZ(){
       op.textContent = encontrada + " ✅";
       select.appendChild(op);
 
+      impressoras.forEach(function(p){
+        if(p !== encontrada){
+          var op2 = document.createElement("option");
+          op2.value = p;
+          op2.textContent = p;
+          select.appendChild(op2);
+        }
+      });
+
       status.className = "status alerta";
-      status.textContent = "Impressora correta encontrada e selecionada: " + encontrada;
-      return;
+      status.textContent = "Impressora encontrada e selecionada: " + encontrada;
+      return true;
     }
 
     impressoras.forEach(function(p){
@@ -119,44 +530,70 @@ async function conectarQZ(){
       select.appendChild(op);
     });
 
-    status.textContent = "Não encontrei exatamente: " + IMPRESSORA_PADRAO + ". Selecione manualmente na lista.";
+    status.className = "status";
+    status.textContent = "Não encontrei a L42 automaticamente. Selecione manualmente.";
+    return true;
 
   }catch(e){
-    status.className = "status";
-    status.textContent = "Erro ao conectar. Verifique se o QZ Tray está aberto.";
-    alert("Erro QZ: " + e);
+    status.className = "status erro";
+    status.textContent = "Erro ao conectar ao QZ Tray: " + e;
+    return false;
   }
 }
 
 document.getElementById("arquivo").addEventListener("change", function(e){
   var file = e.target.files[0];
   if(!file) return;
+
   var reader = new FileReader();
-  reader.onload = function(){ processarLinhas(reader.result); };
+
+  reader.onload = function(){
+    processarLinhas(reader.result);
+  };
+
   reader.readAsText(file, "UTF-8");
 });
 
-function processarTextoManual(){ processarLinhas(document.getElementById("textoManual").value); }
+function processarTextoManual(){
+  processarLinhas(document.getElementById("textoManual").value);
+}
 
 function processarLinhas(texto){
-  var linhas = texto.split(/\r?\n/).map(function(l){ return l.trim(); }).filter(function(l){ return l !== ""; });
-  etiquetas = linhas.map(function(l){ return extrairItens(l); }).filter(function(itens){ return itens.length > 0; });
+  var linhas = texto
+    .split(/\r?\n/)
+    .map(function(l){ return l.trim(); })
+    .filter(function(l){ return l !== ""; });
+
+  etiquetas = linhas
+    .map(function(l){ return extrairItens(l); })
+    .filter(function(itens){ return itens.length > 0; });
+
   mostrarLista();
-  document.getElementById("status").textContent = etiquetas.length + " etiqueta(s) carregada(s). Impressora: " + document.getElementById("impressoras").value;
+  atualizarPreviewAjustes();
+
+  document.getElementById("status").className = "status alerta";
+  document.getElementById("status").textContent = etiquetas.length + " etiqueta(s) carregada(s).";
 }
 
 function extrairItens(linha){
-  var regex = /([A-Z]-\d+)\((\d+)\)/g;
+  var regex = /([A-Z]-\d+)\((\d+)\)/gi;
   var itens = [];
   var match;
+
   while((match = regex.exec(linha)) !== null){
-    itens.push({ cluster: match[1], total: Number(match[2]) });
+    itens.push({
+      cluster: match[1].toUpperCase(),
+      total: Number(match[2])
+    });
   }
+
   return itens;
 }
 
 function totalGeral(itens){
-  return itens.reduce(function(soma, item){ return soma + item.total; }, 0);
+  return itens.reduce(function(soma, item){
+    return soma + item.total;
+  }, 0);
 }
 
 function mostrarLista(){
@@ -171,22 +608,87 @@ function mostrarLista(){
   etiquetas.forEach(function(itens, index){
     var div = document.createElement("div");
     div.className = "item";
+
     div.innerHTML =
-      '<div class="item-topo"><strong>Etiqueta ' + (index + 1) + '</strong>' +
-      '<button onclick="imprimirUma(' + index + ')">Imprimir</button></div>' +
+      '<div class="item-topo">' +
+      '<strong>Etiqueta ' + (index + 1) + '</strong>' +
+      '<button onclick="imprimirUma(' + index + ')">Imprimir</button>' +
+      '</div>' +
       previewHTML(itens);
+
     lista.appendChild(div);
   });
 }
 
 function previewHTML(itens){
-  var html = '<div class="preview"><h2>ROTA</h2>';
+  var html = '<div class="miniPreview">';
+  html += '<h2>ROTA</h2>';
   html += '<div class="linha cabecalho"><span>CLUSTER</span><span>TOTAL</span></div>';
+
   itens.forEach(function(i){
     html += '<div class="linha"><span>' + i.cluster + '</span><span>' + i.total + '</span></div>';
   });
-  html += '<div class="total"><span>TOTAL</span><span>' + totalGeral(itens) + '</span></div></div>';
+
+  html += '<div class="total"><span>TOTAL</span><span>' + totalGeral(itens) + '</span></div>';
+  html += '</div>';
+
   return html;
+}
+
+function atualizarPreviewAjustes(){
+  var largura = Number(document.getElementById("largura").value) || 100;
+  var altura = Number(document.getElementById("altura").value) || 150;
+  var fonte = Number(document.getElementById("fonte").value) || 58;
+  var fonteTitulo = Number(document.getElementById("fonteTitulo").value) || 60;
+  var espaco = Number(document.getElementById("espaco").value) || 1;
+  var margem = Number(document.getElementById("margem").value) || 10;
+  var offsetY = Number(document.getElementById("offsetY").value) || 35;
+
+  var preview = document.getElementById("previewEtiqueta");
+  var conteudo = document.getElementById("previewConteudo");
+
+  var escala = 2.25;
+
+  preview.style.width = (largura * escala) + "px";
+  preview.style.height = (altura * escala) + "px";
+
+  document.getElementById("reguaHorizontal").textContent = largura + " mm";
+  document.getElementById("reguaVertical").textContent = altura + " mm";
+
+  var itens = etiquetas.length > 0 ? etiquetas[0] : [
+    {cluster:"B-14", total:66},
+    {cluster:"B-15", total:23},
+    {cluster:"B-16", total:84}
+  ];
+
+  conteudo.style.paddingLeft = (margem * escala) + "px";
+  conteudo.style.paddingRight = (margem * escala) + "px";
+  conteudo.style.paddingBottom = (margem * escala) + "px";
+  conteudo.style.paddingTop = ((margem + offsetY) * escala) + "px";
+
+  var html = "";
+
+  html += '<div class="previewRota" style="font-size:' + (fonteTitulo / 2.5) + 'px;margin-bottom:' + (espaco / 1.8) + 'px;">ROTA</div>';
+
+  html += '<div class="previewLinha previewCabecalho" style="font-size:' + (fonte / 3.1) + 'px;padding-bottom:6px;margin-bottom:' + (espaco / 2) + 'px;">';
+  html += '<span>CLUSTER</span><span>TOTAL</span>';
+  html += '</div>';
+
+  itens.forEach(function(i){
+    html += '<div class="previewLinha" style="font-size:' + (fonte / 2.8) + 'px;margin-bottom:' + (espaco / 2.2) + 'px;">';
+    html += '<span>' + i.cluster + '</span><span>' + i.total + '</span>';
+    html += '</div>';
+  });
+
+  html += '<div class="previewLinha previewTotal" style="font-size:' + (fonte / 2.8) + 'px;padding-top:8px;">';
+  html += '<span>TOTAL</span><span>' + totalGeral(itens) + '</span>';
+  html += '</div>';
+
+  conteudo.innerHTML = html;
+
+  document.getElementById("barraMargem").style.width = Math.min(margem * 8, 100) + "%";
+  document.getElementById("barraFonte").style.width = Math.min(fonte, 100) + "%";
+  document.getElementById("barraOffset").style.width = Math.min(offsetY * 4, 100) + "%";
 }
 
 function criarPaginaEtiqueta(itens){
@@ -196,17 +698,21 @@ function criarPaginaEtiqueta(itens){
   var fonteTitulo = Number(document.getElementById("fonteTitulo").value);
   var espaco = Number(document.getElementById("espaco").value);
   var margem = Number(document.getElementById("margem").value);
+  var offsetY = Number(document.getElementById("offsetY").value);
 
   var doc = document.implementation.createHTMLDocument("etiqueta");
   var style = doc.createElement("style");
+
   style.textContent =
     "@page{size:" + largura + "mm " + altura + "mm;margin:0;}" +
-    "html,body{width:" + largura + "mm;height:" + altura + "mm;margin:0;padding:0;font-family:Arial,sans-serif;color:#000;background:#fff;}" +
-    ".etiqueta{width:" + largura + "mm;height:" + altura + "mm;padding:" + margem + "mm;box-sizing:border-box;}" +
-    ".titulo{text-align:center;font-size:" + fonteTitulo + "px;font-weight:900;margin-bottom:22px;}" +
-    ".linha{display:flex;justify-content:space-between;align-items:center;font-size:" + fonte + "px;font-weight:800;margin-bottom:" + espaco + "px;}" +
-    ".cabecalho{border-bottom:4px solid #000;padding-bottom:12px;margin-bottom:18px;}" +
-    ".total{border-top:4px solid #000;padding-top:16px;margin-top:28px;}";
+    "html,body{width:" + largura + "mm;height:" + altura + "mm;margin:0;padding:0;font-family:Arial,sans-serif;color:#000;background:#fff;overflow:hidden;}" +
+    ".etiqueta{width:" + largura + "mm;height:" + altura + "mm;box-sizing:border-box;display:flex;flex-direction:column;padding-left:" + margem + "mm;padding-right:" + margem + "mm;padding-bottom:" + margem + "mm;padding-top:" + (margem + offsetY) + "mm;}" +
+    ".titulo{text-align:center;font-size:" + fonteTitulo + "px;font-weight:900;line-height:1;margin-bottom:" + espaco + "px;}" +
+    ".linha{display:flex;justify-content:space-between;align-items:center;font-size:" + fonte + "px;font-weight:900;line-height:1.05;margin-bottom:" + espaco + "px;}" +
+    ".cabecalho{border-bottom:5px solid #000;padding-bottom:12px;margin-bottom:" + espaco + "px;}" +
+    ".total{border-top:5px solid #000;padding-top:16px;margin-top:auto;margin-bottom:0;}" +
+    "span{white-space:nowrap;}";
+
   doc.head.appendChild(style);
 
   var etiqueta = doc.createElement("div");
@@ -225,15 +731,7 @@ function criarPaginaEtiqueta(itens){
   itens.forEach(function(i){
     var linha = doc.createElement("div");
     linha.className = "linha";
-
-    var c = doc.createElement("span");
-    c.textContent = i.cluster;
-
-    var t = doc.createElement("span");
-    t.textContent = i.total;
-
-    linha.appendChild(c);
-    linha.appendChild(t);
+    linha.innerHTML = "<span>" + i.cluster + "</span><span>" + i.total + "</span>";
     etiqueta.appendChild(linha);
   });
 
@@ -243,26 +741,52 @@ function criarPaginaEtiqueta(itens){
   etiqueta.appendChild(total);
 
   doc.body.appendChild(etiqueta);
+
   return "<!DOCTYPE html>" + doc.documentElement.outerHTML;
 }
 
 async function imprimirTeste(){
-  await imprimirHTML([criarPaginaEtiqueta([{cluster:"TESTE", total:123},{cluster:"L42", total:456}])]);
+  await imprimirHTML([
+    criarPaginaEtiqueta([
+      {cluster:"B-14", total:66},
+      {cluster:"B-15", total:23},
+      {cluster:"B-16", total:84}
+    ])
+  ]);
 }
 
 async function imprimirUma(index){
-  await imprimirHTML([criarPaginaEtiqueta(etiquetas[index])]);
+  await imprimirHTML([
+    criarPaginaEtiqueta(etiquetas[index])
+  ]);
 }
 
 async function imprimirTodas(){
-  if(etiquetas.length === 0){ alert("Nenhuma etiqueta carregada."); return; }
-  var htmls = etiquetas.map(function(itens){ return criarPaginaEtiqueta(itens); });
+  if(etiquetas.length === 0){
+    alert("Nenhuma etiqueta carregada.");
+    return;
+  }
+
+  var htmls = etiquetas.map(function(itens){
+    return criarPaginaEtiqueta(itens);
+  });
+
   await imprimirHTML(htmls);
 }
 
 async function imprimirHTML(listaHTML){
+  var status = document.getElementById("status");
+
   try{
-    if(!qz.websocket.isActive()){ await conectarQZ(); }
+    if(!qz.websocket.isActive()){
+      var conectado = await conectarQZ();
+
+      if(!conectado){
+        status.className = "status erro";
+        status.textContent = "Impressão cancelada. QZ Tray não conectado.";
+        return;
+      }
+    }
 
     var impressora = document.getElementById("impressoras").value;
 
@@ -271,8 +795,10 @@ async function imprimirHTML(listaHTML){
       return;
     }
 
-    if(impressora !== IMPRESSORA_PADRAO){
-      var confirmar = confirm("A impressora selecionada não é a padrão. Selecionada: " + impressora + "\\nDeseja imprimir mesmo assim?");
+    var nome = impressora.toUpperCase();
+
+    if(!nome.includes("L42") && !nome.includes("ELGIN")){
+      var confirmar = confirm("A impressora selecionada não parece ser a L42. Deseja imprimir mesmo assim?");
       if(!confirmar) return;
     }
 
@@ -284,32 +810,48 @@ async function imprimirHTML(listaHTML){
         height: Number(document.getElementById("altura").value)
       },
       margins: 0,
-      colorType: "grayscale"
+      colorType: "grayscale",
+      density: 203,
+      interpolation: "nearest-neighbor"
     });
 
     var dados = listaHTML.map(function(h){
-      return { type: "pixel", format: "html", flavor: "plain", data: h };
+      return {
+        type: "pixel",
+        format: "html",
+        flavor: "plain",
+        data: h
+      };
     });
 
-    document.getElementById("status").textContent = "Enviando para: " + impressora + "...";
+    status.className = "status";
+    status.textContent = "Enviando para: " + impressora + "...";
 
     await qz.print(config, dados);
 
-    document.getElementById("status").className = "status alerta";
-    document.getElementById("status").textContent = "Enviado para impressão: " + impressora;
+    status.className = "status alerta";
+    status.textContent = "Enviado para impressão: " + impressora;
 
   }catch(e){
-    alert("Erro ao imprimir: " + e);
-    document.getElementById("status").textContent = "Erro ao imprimir: " + e;
+    var erro = String(e);
+    status.className = "status erro";
+
+    if(erro.toLowerCase().includes("blocked")){
+      status.textContent = "Impressão bloqueada pelo QZ Tray.";
+      alert("Você clicou em BLOCK. A impressão foi cancelada.");
+      return;
+    }
+
+    status.textContent = "Erro ao imprimir: " + erro;
+    alert("Erro ao imprimir: " + erro);
   }
 }
 
 function carregarExemplo(){
   document.getElementById("textoManual").value =
     "B-14(66)+B-15(23)+B-16(84)\n" +
-    "B-17(76)+B-18(55)+B-19(37)\n" +
-    "B-20(63)+B-21(48)+B-22(39)\n" +
-    "B-25(37)+B-26(14)+B-27(69)";
+    "D-18(62)+D-19(35)";
+
   processarTextoManual();
 }
 
@@ -320,7 +862,9 @@ function limparTudo(){
   document.getElementById("lista").innerHTML = "";
   document.getElementById("status").className = "status";
   document.getElementById("status").textContent = "Tudo limpo.";
+  atualizarPreviewAjustes();
 }
 </script>
+
 </body>
 </html>
